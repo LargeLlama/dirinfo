@@ -20,7 +20,7 @@ int main()
 		stat(direntry->d_name, &buffer);
 		if (S_ISREG(buffer.st_mode))
 		{
-			int total = total + buffer.st_size;
+			total += buffer.st_size;
 			printf("File name: %s\nFile size: %ldB\n", direntry->d_name, buffer.st_size);  
 		}
 	}
