@@ -1,2 +1,2 @@
 # dirinfo
-## Rubin Peci and Derek Yin
+## Rubin Peci and Derek Chan 
