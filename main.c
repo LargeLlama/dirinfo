@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <dirent.h>
 #include <sys/stat.h>
 
@@ -7,8 +8,8 @@ int main(int argc, char *argv[])
 	struct dirent *direntry;
 	struct stat buffer;
 	int total = 0;
-
-	DIR *directory;
+	char dir_name[100];
+	DIR *directory = NULL;
 
 	// // testing printfs
 	// printf("argc: %d\n", argc);
@@ -19,7 +20,6 @@ int main(int argc, char *argv[])
 		directory = opendir(argv[1]);
 	}
 	else{
-		char dir_name[100];
 		printf("Enter a directory: \n");
 		scanf("%s", dir_name);
 		directory = opendir(dir_name);
@@ -28,11 +28,15 @@ int main(int argc, char *argv[])
 	/* lines 17 to 25 work but if the thing entered is not ".", it thinks all the
 			items in the directory are other directories. IDK why */
 
-	if (!directory)
+	while (!directory)
 	{
 		printf("Directory given does not exist! ERORR! \n");
-		return 1;
+		printf("Enter a directory: \n");
+		scanf("%s", dir_name);
+		directory = opendir(dir_name);
+
 	}
+
 	printf("FORMAT\nTYPE : NAME : SIZE\n");
 
 	while((direntry = readdir(directory)))
